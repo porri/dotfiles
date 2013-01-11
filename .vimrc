@@ -41,13 +41,15 @@ set listchars=tab:→\ ,eol:¬,trail:·,extends:#,nbsp:_
 nmap <silent> <leader>s :set nolist!<CR>    " Make trailing whitespace visible with ,s
 
 
-" SANE SEARCHING
+" SEARCHING
 set smartcase           " case insensitive
 set hlsearch            " Hilight search term
 set showmatch           " Show matching brackets
 set incsearch           " ... dynamically as they are typed
 set ignorecase          " Ignore case of searches
 nmap <silent> <leader>n :silent :nohlsearch<CR>  " turn of hlsearch temporarily
+nnoremap / /\v          " automatically insert a \v before any search string, so search uses normal regexes
+vnoremap / /\v
 
 
 " FILE SUPPORT
@@ -68,7 +70,11 @@ vnoremap <tab> %
 imap <silent> <S-tab> <C-v><tab>    " Shift-tab to insert a hard tab
 noremap p p`[       " don't move the cursor after pasting
 noremap P P`[       " (by jumping to back start of previously changed text)
-
+" Better split switching (Ctrl-j, Ctrl-k, Ctrl-h, Ctrl-l)
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
 
 " STRIP TRAILING WHITESPACE (,ss)
@@ -82,7 +88,7 @@ endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
 
 
-" Automatic commands
+" AUTOMATIC COMMANDS
 if has("autocmd")
 	" Enable file type detection
 	filetype on
@@ -91,7 +97,7 @@ if has("autocmd")
 endif
 
 
-" status / command line
+" STATUS / COMMAND LINE
 set statusline=
 set statusline+=%f\ %2*%m\ %1*%h
 set statusline+=%#warningmsg#
@@ -104,4 +110,4 @@ set showmode            " Show the current mode
 set showcmd             " Show the (partial) command as it’s being typed
 set wildmenu            " Enhance command-line completion
 
-
+" last file https://github.com/cypher/dotfiles/blob/master/vimrc
